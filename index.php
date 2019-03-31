@@ -14,13 +14,12 @@ require 'upload.php';
 </head>
 <body>
 <h1>Upload Files</h1>
-<form class="col-8" action="" method="post" enctype="multipart/form-data">
+<form class="row col-8 offset-2 form-upload" action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
-        <label for="file">Upload File</label>
+        <label for="file"></label>
         <input type="file" class="form-control-file" multiple="multiple"  id="file" name="files[]">
     </div>
     <?php
-
     if (isset($error)) {
     ?>
         <div class="alert alert-danger" role="alert">
@@ -29,7 +28,7 @@ require 'upload.php';
     <?php
     }
     ?>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary submit-form">Submit</button>
 </form>
 
 <?php
@@ -45,44 +44,34 @@ if (isset($results)) {
 </div>
 <?php
 }
-
-if (!empty($it)) {
 ?>
+<div class="container">
+    <div class="row justify-content-around">
+        <?php
 
-<table class="table col-6">
-    <thead>
-    <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Edit</th>
-    </tr>
-    </thead>
-    <tbody>
+        $y = 0;
 
-    <?php
+        foreach ($it as $fileInfo)
+        {
+            $y += 1;
+        ?>
 
-    $y = 0;
+            <div class="col-xs-6 col-md-3 container-card">
+                <div class="card-box">
+                    <div class="info-img-box" >
+                        <p class="nbr-img"><?= $y ?></p>
+                        <p class="title-img"><?php echo $fileInfo->getFilename() ?></p>
+                    </div>
+                    <img class="img-file" src="upload_files/<?php echo $fileInfo->getFilename() ?>" alt="Image N°<?= $y ?>">
+                    <a href="?delete=<?php echo $fileInfo->getFilename()?>" title="Effacer cette image" class="delete-button" title="">X</a>
+                </div>
+            </div>
 
-    foreach ($it as $fileinfo)
-    {
-        $y += 1;
-    ?>
-        <tr>
-            <th scope="row"><?= $y ?></th>
-            <td><?php echo $fileinfo->getFilename() ?></td>
-            <td><a href="?delete=<?php echo $fileinfo->getFilename()?>">Delete</a></td>
-        </tr>
-<?php
-    }
-?>
- </tbody>
-</table>
-<?php
-}
-?>
-
-
-
+        <?php
+        }
+        ?>
+    </div>
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

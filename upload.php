@@ -78,10 +78,13 @@ if (isset($_FILES['files'])) {
     }
 }
 
+// Instanciation de FilesystemIterator
 $it = new FilesystemIterator('./upload_files');
 
+// Supression du fichier contenu dans $_GET['delete']
 if (isset($_GET['delete'])) {
 
+    // On supprime puis on redirige sur l'index pour eviter les erreurs
     unlink('./upload_files/' . $_GET['delete']);
     header('Location:index.php');
 
