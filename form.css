@@ -1,0 +1,17 @@
+h1
+ {
+     text-align: center;
+     margin-bottom: 40px;
+
+ }
+
+form, .result-box, table, .info-file
+{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.result-box, table, .info-file
+{
+    margin-top: 40px;
+}
